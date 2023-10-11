@@ -30,7 +30,8 @@
             exit( 'Пользователь уже существует');
         }
         
-        $date = [$_POST['login'], $_POST['password'], $_POST['email']];
+             $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+        $date = [$_POST['login'], $pass_hash, $_POST['email']];
         $res = $connection->prepare ("INSERT INTO `user` (`login`, `password`, `email`) VALUES (?,?,?);");
         $res = $res->execute ($date);
 
